@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class EnumEqualsConverterTest
 	{
 		enum Number
@@ -29,40 +29,40 @@ namespace Base.Test
 
 		#region Convert
 
-		[TestMethod]
+		[Test]
 		public void Check_Normal_Enum_Matches()
 		{
 			this.CheckConvert(Number.One, Number.One, true, new EnumEqualsConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Normal_Enum_Mismatches()
 		{
 			this.CheckConvert(Number.Three, Number.One, false, new EnumEqualsConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Flags_Enum_Matches()
 		{
 			this.CheckConvert(Colors.Red | Colors.Blue, Colors.Red, true, new EnumEqualsConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Flags_Enum_Mismatches()
 		{
 			this.CheckConvert(Colors.Red | Colors.Blue, Colors.Green, false, new EnumEqualsConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_No_Enum_Value_Throws()
 		{
-			Assert.ThrowsException<NotSupportedException>(() => new EnumEqualsConverter().Convert(new object(), typeof(Number), Number.One, CultureInfo.CurrentCulture));
+			Assert.Throws<NotSupportedException>(() => new EnumEqualsConverter().Convert(new object(), typeof(Number), Number.One, CultureInfo.CurrentCulture));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_No_Enum_Parameter_Throws()
 		{
-			Assert.ThrowsException<NotSupportedException>(() => new EnumEqualsConverter().Convert(Number.One, typeof(Number), null, CultureInfo.CurrentCulture));
+			Assert.Throws<NotSupportedException>(() => new EnumEqualsConverter().Convert(Number.One, typeof(Number), null, CultureInfo.CurrentCulture));
 		}
 
 		private void CheckConvert<TEnum>(TEnum realValue, TEnum expectedValue, bool target, EnumEqualsConverter converter) where TEnum : Enum
@@ -85,10 +85,10 @@ namespace Base.Test
 
 		#region Convert Back
 
-		[TestMethod]
+		[Test]
 		public void Check_ConvertBack_Throws()
 		{
-			Assert.ThrowsException<InvalidOperationException>(() => new EnumEqualsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
+			Assert.Throws<InvalidOperationException>(() => new EnumEqualsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
 		}
 
 		#endregion

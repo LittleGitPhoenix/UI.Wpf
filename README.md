@@ -1,10 +1,15 @@
 # Phoenix.UI.Wpf.Base
 
-| .NET Framework | .NET Standard | .NET Core |
+| .NET Framework | .NET Core | .NET |
 | :-: | :-: | :-: |
-| :heavy_check_mark: 4.5 | :heavy_minus_sign: | :heavy_check_mark: 3.1 |
+| :heavy_check_mark: 4.5 | :heavy_check_mark: 3.1 | :heavy_check_mark: 5.0 |
 
 Collection of base projects for general **WPF** development.
+___
+
+# Table of content
+
+[toc]
 ___
 
 # Converters

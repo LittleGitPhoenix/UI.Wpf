@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class InverseBooleanConverterTest
 	{
 		#region Convert
 
-		[TestMethod]
+		[Test]
 		public void Check_True_Is_False()
 		{
 			this.CheckConvert(true, false, new InverseBooleanConverter());
 			this.CheckConvertBack(true, false, new InverseBooleanConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_False_Is_True()
 		{
 			this.CheckConvert(false, true, new InverseBooleanConverter());
 			this.CheckConvertBack(false, true, new InverseBooleanConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Null_Is_False()
 		{
 			this.CheckConvert(null, true, new InverseBooleanConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Object_Is_False()
 		{
 			this.CheckConvert(new object(), true, new InverseBooleanConverter());

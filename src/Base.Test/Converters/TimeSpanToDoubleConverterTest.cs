@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class TimeSpanToDoubleConverterTest
 	{
 		#region Convert
 		
-		[TestMethod]
+		[Test]
 		public void Check_Ticks()
 		{
 			var target = 5000;
@@ -18,7 +18,7 @@ namespace Base.Test
 			this.CheckConvert(timeSpan, target, new TimeSpanToDoubleConverter(){UnitOfTime = UnitOfTime.Ticks});
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Milliseconds()
 		{
 			var target = 5000;
@@ -26,7 +26,7 @@ namespace Base.Test
 			this.CheckConvert(timeSpan, target, new TimeSpanToDoubleConverter(){UnitOfTime = UnitOfTime.Milliseconds});
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Seconds()
 		{
 			var target = 5000;
@@ -34,7 +34,7 @@ namespace Base.Test
 			this.CheckConvert(timeSpan, target, new TimeSpanToDoubleConverter(){UnitOfTime = UnitOfTime.Seconds});
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Minutes()
 		{
 			var target = 5000;
@@ -42,7 +42,7 @@ namespace Base.Test
 			this.CheckConvert(timeSpan, target, new TimeSpanToDoubleConverter(){UnitOfTime = UnitOfTime.Minutes });
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Hours()
 		{
 			var target = 5000;
@@ -50,7 +50,7 @@ namespace Base.Test
 			this.CheckConvert(timeSpan, target, new TimeSpanToDoubleConverter(){UnitOfTime = UnitOfTime.Hours });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Days()
 		{
 			var target = 5000;
@@ -58,7 +58,7 @@ namespace Base.Test
 			this.CheckConvert(timeSpan, target, new TimeSpanToDoubleConverter(){UnitOfTime = UnitOfTime.Days });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Object_Is_Zero()
 		{
 			this.CheckConvert(new object(), 0, new TimeSpanToDoubleConverter());
@@ -84,7 +84,7 @@ namespace Base.Test
 
 		#region Convert Back
 
-		[TestMethod]
+		[Test]
 		public void Check_To_TimeSpan_From_Ticks_Succeeds()
 		{
 			var value = 5000;
@@ -92,7 +92,7 @@ namespace Base.Test
 			this.CheckConvertBack(value, target, new TimeSpanToDoubleConverter() {UnitOfTime = UnitOfTime.Ticks});
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_To_TimeSpan_From_Milliseconds_Succeeds()
 		{
 			var value = 5000;
@@ -100,7 +100,7 @@ namespace Base.Test
 			this.CheckConvertBack(value, target, new TimeSpanToDoubleConverter() {UnitOfTime = UnitOfTime.Milliseconds });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_To_TimeSpan_From_Seconds_Succeeds()
 		{
 			var value = 5000;
@@ -108,7 +108,7 @@ namespace Base.Test
 			this.CheckConvertBack(value, target, new TimeSpanToDoubleConverter() {UnitOfTime = UnitOfTime.Seconds });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_To_TimeSpan_From_Minutes_Succeeds()
 		{
 			var value = 5000;
@@ -116,7 +116,7 @@ namespace Base.Test
 			this.CheckConvertBack(value, target, new TimeSpanToDoubleConverter() {UnitOfTime = UnitOfTime.Minutes });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_To_TimeSpan_From_Hours_Succeeds()
 		{
 			var value = 5000;
@@ -124,7 +124,7 @@ namespace Base.Test
 			this.CheckConvertBack(value, target, new TimeSpanToDoubleConverter() {UnitOfTime = UnitOfTime.Hours });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_To_TimeSpan_From_Days_Succeeds()
 		{
 			var value = 5000;
@@ -132,7 +132,7 @@ namespace Base.Test
 			this.CheckConvertBack(value, target, new TimeSpanToDoubleConverter() {UnitOfTime = UnitOfTime.Days });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Object_Is_TimeSpan_Zero()
 		{
 			this.CheckConvertBack(new object(), TimeSpan.Zero, new TimeSpanToDoubleConverter());

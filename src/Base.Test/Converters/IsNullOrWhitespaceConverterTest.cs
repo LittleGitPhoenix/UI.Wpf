@@ -1,40 +1,40 @@
 ﻿using System;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class IsNullOrWhitespaceConverterTest
 	{
 		#region Convert
 
-		[TestMethod]
+		[Test]
 		public void Check_Null_Is_True()
 		{
 			this.CheckConvert(null, true, new IsNullOrWhitespaceConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Empty_Is_True()
 		{
 			this.CheckConvert("", true, new IsNullOrWhitespaceConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Whitespace_Is_True()
 		{
 			this.CheckConvert("   ", true, new IsNullOrWhitespaceConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Content_Is_False()
 		{
 			this.CheckConvert(Guid.NewGuid().ToString(), false, new IsNullOrWhitespaceConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Object_Is_False()
 		{
 			this.CheckConvert(new object(), false, new IsNullOrWhitespaceConverter());
@@ -60,10 +60,10 @@ namespace Base.Test
 
 		#region Convert Back
 
-		[TestMethod]
+		[Test]
 		public void Check_ConvertBack_Throws()
 		{
-			Assert.ThrowsException<InvalidOperationException>(() => new HasElementsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
+			Assert.Throws<InvalidOperationException>(() => new HasElementsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
 		}
 
 		#endregion

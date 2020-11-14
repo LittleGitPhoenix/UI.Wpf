@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Windows;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class HasElementsConverterTest
 	{
 		#region Convert
 
-		[TestMethod]
+		[Test]
 		public void Check_Null_Is_False()
 		{
 			this.CheckConvert(null, false, new HasElementsConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Empty_Collection_Is_False()
 		{
 			this.CheckConvert(new List<int>(), false, new HasElementsConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Filled_Collection_Is_True()
 		{
 			this.CheckConvert(new List<int>() {int.MaxValue}, true, new HasElementsConverter());
@@ -50,10 +49,10 @@ namespace Base.Test
 
 		#region Convert Back
 
-		[TestMethod]
+		[Test]
 		public void Check_ConvertBack_Throws()
 		{
-			Assert.ThrowsException<InvalidOperationException>(() => new HasElementsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
+			Assert.Throws<InvalidOperationException>(() => new HasElementsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
 		}
 
 		#endregion

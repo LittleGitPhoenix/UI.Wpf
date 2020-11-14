@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class InverseVisibilityConverterTest
 	{
 		#region Convert
 
-		[TestMethod]
+		[Test]
 		public void Check_TrueVisibility_Will_Be_FalseVisibility()
 		{
 			var trueVisibility = Visibility.Visible;
@@ -19,7 +19,7 @@ namespace Base.Test
 			this.CheckConvert(trueVisibility, falseVisibility, new InverseVisibilityConverter(){TrueVisibility = trueVisibility, FalseVisibility = falseVisibility });
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_FalseVisibility_Will_Be_TrueVisibility()
 		{
 			var trueVisibility = Visibility.Visible;
@@ -44,10 +44,10 @@ namespace Base.Test
 
 		#region Convert Back
 
-		[TestMethod]
+		[Test]
 		public void Check_ConvertBack_Throws()
 		{
-			Assert.ThrowsException<InvalidOperationException>(() => new HasElementsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
+			Assert.Throws<InvalidOperationException>(() => new HasElementsConverter().ConvertBack(null, null, null, CultureInfo.CurrentCulture));
 		}
 
 		#endregion

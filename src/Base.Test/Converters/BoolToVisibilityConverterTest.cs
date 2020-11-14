@@ -1,42 +1,43 @@
+using System;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class BoolToVisibilityConverterTest
 	{
 		#region Convert
 
-		[TestMethod]
+		[Test]
 		public void Check_True_Is_Visible_By_Default()
 		{
 			this.CheckConvert(true, Visibility.Visible, new BoolToVisibilityConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_True_Is_Hidden_When_Overridden()
 		{
 			var targetVisibility = Visibility.Hidden;
 			this.CheckConvert(true, targetVisibility, new BoolToVisibilityConverter() { TrueVisibility = targetVisibility });
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_True_Is_Collapsed_When_Overridden()
 		{
 			var targetVisibility = Visibility.Collapsed;
 			this.CheckConvert(true, targetVisibility, new BoolToVisibilityConverter() { TrueVisibility = targetVisibility});
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_False_Is_Collapsed_By_Default()
 		{
 			this.CheckConvert(false, Visibility.Collapsed, new BoolToVisibilityConverter());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Null_Is_Collapsed_By_Default()
 		{
 			this.CheckConvert(null, Visibility.Collapsed, new BoolToVisibilityConverter());
@@ -62,25 +63,25 @@ namespace Base.Test
 
 		#region Convert Back
 
-		[TestMethod]
+		[Test]
 		public void Check_Visible_Is_True_By_Default()
 		{
 			this.CheckConvertBack(Visibility.Visible, true, new BoolToVisibilityConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Hidden_Is_False_By_Default()
 		{
 			this.CheckConvertBack(Visibility.Hidden, false, new BoolToVisibilityConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Collapsed_Is_False_By_Default()
 		{
 			this.CheckConvertBack(Visibility.Collapsed, false, new BoolToVisibilityConverter());
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Check_Null_Is_False_By_Default()
 		{
 			this.CheckConvertBack(null, false, new BoolToVisibilityConverter());

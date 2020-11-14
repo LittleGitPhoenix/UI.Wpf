@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Phoenix.UI.Wpf.Base.Converters;
 using Phoenix.UI.Wpf.Base.Extensions;
 
 namespace Base.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class EnumToCollectionConverterTest
 	{
 		enum Number
@@ -31,19 +31,19 @@ namespace Base.Test
 
 		#region Convert
 
-		[TestMethod]
+		[Test]
 		public void Check_Null_Throws()
 		{
-			Assert.ThrowsException<ArgumentNullException>(() => new EnumToCollectionConverter().Convert(null, null, null, CultureInfo.CurrentCulture));
+			Assert.Throws<ArgumentNullException>(() => new EnumToCollectionConverter().Convert(null, null, null, CultureInfo.CurrentCulture));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_No_Enum_Throws()
 		{
-			Assert.ThrowsException<ArgumentException>(() => new EnumToCollectionConverter().Convert(new object(), null, null, CultureInfo.CurrentCulture));
+			Assert.Throws<ArgumentException>(() => new EnumToCollectionConverter().Convert(new object(), null, null, CultureInfo.CurrentCulture));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Normal_Enum_Convert_Succeeds()
 		{
 			var converter = new EnumToCollectionConverter();
@@ -71,7 +71,7 @@ namespace Base.Test
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_Flags_Enum_Convert_Succeeds()
 		{
 			var converter = new EnumToCollectionConverter();
@@ -103,7 +103,7 @@ namespace Base.Test
 
 		#region Convert Back
 
-		[TestMethod]
+		[Test]
 		public void Check_ConvertBack_Succeeds()
 		{
 			var target = Colors.Red | Colors.Blue;
@@ -120,7 +120,7 @@ namespace Base.Test
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_ConvertBack_Returns_Default()
 		{
 			var converter = new EnumToCollectionConverter();
@@ -135,10 +135,10 @@ namespace Base.Test
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Check_ConvertBack_Throws_For_Wrong_Type()
 		{
-			Assert.ThrowsException<ArgumentException>(() => new EnumToCollectionConverter().ConvertBack(null, typeof(object), null, CultureInfo.CurrentCulture));
+			Assert.Throws<ArgumentException>(() => new EnumToCollectionConverter().ConvertBack(null, typeof(object), null, CultureInfo.CurrentCulture));
 		}
 
 		#endregion
