@@ -1,0 +1,71 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:Phoenix.UI.Wpf.Metro.Controls"
+	xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+	xmlns:phoenix="http://programming.little-phoenix.de/wpf/"
+	>
+
+	<!--#region BusyIndicator-->
+	<Style TargetType="{x:Type local:BusyIndicator}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate
+					TargetType="{x:Type local:BusyIndicator}"
+					>
+
+					<Grid>
+
+						<ContentPresenter
+							Margin="{TemplateBinding Padding}"
+							Content="{TemplateBinding Content}"
+							/>
+
+						<Grid
+							Name="BusyOverlay"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Stretch"
+							Visibility="{TemplateBinding IsBusy, Converter={phoenix:BoolToVisibilityConverter}}"
+							>
+
+							<Grid
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Background="{DynamicResource WhiteBrush}"
+								Opacity="{TemplateBinding OverlayOpacity}"
+								/>
+
+							<StackPanel
+								HorizontalAlignment="Center"
+								VerticalAlignment="Center"
+								>
+
+								<metro:ProgressRing
+									Name="ProgressRing"
+									Foreground="{DynamicResource AccentColorBrush}"
+									IsActive="{TemplateBinding IsBusy}"
+									/>
+
+								<TextBlock
+									Margin="0,10,0,0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									FontSize="{DynamicResource NormalFontSize}"
+									Foreground="{DynamicResource AccentColorBrush}"
+									Text="{TemplateBinding Message}"
+									Visibility="{TemplateBinding Message, Converter={phoenix:IsNullOrWhitespaceToVisibilityConverter}}"
+									/>
+
+							</StackPanel>
+
+						</Grid>
+
+					</Grid>
+
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!--#endregion-->
+
+</ResourceDictionary>

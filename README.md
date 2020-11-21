@@ -1,10 +1,10 @@
-# Phoenix.UI.Wpf.Base
+# Phoenix.UI.Wpf
 
 | .NET Framework | .NET Core | .NET |
 | :-: | :-: | :-: |
 | :heavy_check_mark: 4.5 | :heavy_check_mark: 3.1 | :heavy_check_mark: 5.0 |
 
-Collection of base projects for general **WPF** development.
+Project for general **WPF** development.
 ___
 
 # Table of content
@@ -12,13 +12,42 @@ ___
 [toc]
 ___
 
-# Converters
+# General
 
-To use the converters reference the namespace in the root of the **XAML** document.
+To make use of functionality regarding XAML, the following namespace must be imported:
 
-```xml
+```xaml
 xmlns:phoenix="http://programming.little-phoenix.de/wpf/"
 ```
+
+___
+
+# Converters
+
+## Base
+
+The base class for custom converters is the `SourceValueConverter`. It inherits from `MarkupExtension` and therefore implementing converts can be used directly in XAML code.
+
+```xaml
+<TextBlock
+	Visibility="{Binding SomeBoolean, Converter={phoenix:BoolToVisibilityConverter}}"
+/>
+```
+
+When creating own converts, consider using `SourceValueConverter` as its base. It forces the implementation of the following `Convert` method, that must handle conversion from source to target.
+
+```csharp
+object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+```
+
+Optionally the `ConvertBack` method can be overridden. If left untouched, then an `InvalidOperationException` will be thrown by the base class.
+
+```csharp
+object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+```
+
+## Implementations
+
 The following symbols are used to specify how the converters are able to handle value conversion.
 
 | Symbol | Meaning |
@@ -34,81 +63,91 @@ The following symbols have other meaning.
 | :white_circle: | This converter provides a **ToVisibility** version. |
 | :red_circle: | This converter provides an inverse **Not** version. |
 
-## BoolToVisibilityConverter :arrow_up_down: :white_circle:
+### BoolToVisibilityConverter :arrow_up_down: :white_circle:
 
-- Checks if the bound **Boolean** is **True** or **False** and converts it into configurable **Visibility**.
+- Checks if the bound **Boolean** is **True** or **False** and converts it into configurable `Visibility`.
 
-## Compare Converters
+### Compare Converters
 
-### IsEqualToConverter :arrow_up: :white_circle: 
+#### IsEqualToConverter :arrow_up: :white_circle: 
 
 - Checks if the bound value equals the passed parameter.
 
-### IsEqualOrGreaterThanConverter :arrow_up: :white_circle: 
+#### IsEqualOrGreaterThanConverter :arrow_up: :white_circle: 
 
 - Checks if the bound value is equal or greater than the passed parameter.
 
-### IsGreaterThanConverter :arrow_up: :white_circle: 
+#### IsGreaterThanConverter :arrow_up: :white_circle: 
 
 - Checks if the bound value is greater than the passed parameter.
 
-### IsEqualOrLowerThanConverter :arrow_up: :white_circle: 
+#### IsEqualOrLowerThanConverter :arrow_up: :white_circle: 
 
 - Checks if the bound value is equal or lower than the passed parameter.
 
-### IsLowerThanConverter :arrow_up: :white_circle: 
+#### IsLowerThanConverter :arrow_up: :white_circle: 
 
 - Checks if the bound value is lower than the passed parameter.
 
-## EnumEqualsConverter :arrow_up: :white_circle: :red_circle:
+### EnumEqualsConverter :arrow_up: :white_circle: :red_circle:
 
-- Checks if the bound **Enum** value matches the **Enum** value of the **ConverterParameter**.
+- Checks if the bound **Enum** value matches the **Enum** value of the `ConverterParameter`.
 
-## EnumToCollectionConverter :arrow_up_down:
+### EnumToCollectionConverter :arrow_up_down:
 
-- Converts the underlying **Enum** of the passed value into a collection of **EnumDescription**.
+- Converts the underlying **Enum** of the passed value into a collection of `EnumDescription`.
 
-## HasElementsConverter :arrow_up: :white_circle:
+### HasElementsConverter :arrow_up: :white_circle:
 
-- Checks if the bound **ICollection** contains elements. If the bound property is **NULL** or it could not be cast then **FALSE** will be returned.
+- Checks if the bound `ICollection` contains elements. If the bound property is **NULL** or it could not be cast, then **FALSE** will be returned.
 
-## Image Converters
+### Image Converters
 
-### StreamToImageSourceConverter :arrow_up:
+#### StreamToImageSourceConverter :arrow_up:
 
-- Converts a **System.IO.Stream** into a **System.Windows.Media.Imaging.BitmapImage** that can be used as source of an image control.
+- Converts a `System.IO.Stream` into a `System.Windows.Media.Imaging.BitmapImage` that can be used as source of an image control.
 
-### BytesToImageSourceConverter :arrow_up:
+#### BytesToImageSourceConverter :arrow_up:
 
-- Converts a **Byte** collection into a **System.Windows.Media.Imaging.BitmapImage** that can be used as source of an image control.
+- Converts a `Byte` collection into a `System.Windows.Media.Imaging.BitmapImage` that can be used as source of an image control.
 ...
 
-## Inverse Converters
+### Inverse Converters
 
-### InverseBooleanConverter :arrow_up_down:
+#### InverseBooleanConverter :arrow_up_down:
 
-- Inverses the bound **Boolean**.
+- Inverses the bound `Boolean`.
 
-### InverseVisibilityConverter :arrow_up:
+#### InverseVisibilityConverter :arrow_up:
 
-- Inverses the bound **Visibility**. Can be used to toggle controls dependent n one another.
+- Inverses the bound `Visibility` of another `UIElement`. Can be used to toggle controls dependent on another one.
 
-## Null Converters
+    ```xaml
+    <TextBlock
+    	Name="ReferenceText"
+    	Visibility="True"
+    	/>
+    <TextBlock
+    	Visibility="{Binding ElementName=ReferenceText, Path=Visibility, Converter={phoenix:InverseVisibilityConverter}}"
+    	/>
+    ```
 
-### IsNullConverter :arrow_up: :white_circle: :red_circle:
+### Null Converters
+
+#### IsNullConverter :arrow_up: :white_circle: :red_circle:
 
 -  Checks if the bound property is **NULL**.
 
-### IsNullOrWhitespaceConverter :arrow_up: :white_circle:
+#### IsNullOrWhitespaceConverter :arrow_up: :white_circle:
 
-- Checks if the bound **String** is **NULL** or whitespace and converts it into configurable **Visibility**.
+- Checks if the bound `String` is **NULL** or whitespace and converts it into configurable `Visibility`.
 
-## TimeSpanToDoubleConverter :arrow_up_down:
+### TimeSpanToDoubleConverter :arrow_up_down:
 
-- Converts a **TimeSpan** into a **Double** and back based on a configurable **UnitOfTime**.
+- Converts a `TimeSpan` into a `Double` and back based on a configurable `UnitOfTime`.
 
 ___
 
 # Authors
 
-* **Felix Leistner**: _v1.x_
+* **Felix Leistner**: _v1.x_ - _v2.x_
