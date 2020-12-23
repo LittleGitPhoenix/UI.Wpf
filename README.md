@@ -148,6 +148,38 @@ The following symbols have other meaning.
 
 ___
 
+# Helper
+
+## OperatingSystemThemeDetection
+
+(Package: Phoenix.UI.Wpf)
+
+This class has one static function that determines the theme of the operating system.
+
+```csharp
+static OperatingSystemTheme GetTheme()
+```
+
+It will return an `OperatingSystemTheme` enumeration. with the following values:
+
+| Value | Description |
+| :-: | :- |
+| Light | The OS currently uses light mode. This is the default and will be used if getting the theme failed. |
+| Dark | The OS currently uses dark mode. |
+
+:heavy_exclamation_mark: The return value will always be `OperatingSystemTheme.Light`  for all OS besides **Windows**.
+
+## ApplicationThemeChanger
+
+(Package: Phoenix.UI.Wpf.Metro)
+
+This class has one static function that changes the **Theme** of the current application to match the operating system style.
+
+```csharp
+static void ChangeApplicationThemeToMatchOperatingSystem()
+```
+___
+
 # Authors
 
-* **Felix Leistner**: _v1.x_ - _v2.x_
+* **Felix Leistner**: _v1.x_

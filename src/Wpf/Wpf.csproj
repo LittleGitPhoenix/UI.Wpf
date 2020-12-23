@@ -3,12 +3,14 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0-windows;netcoreapp3.1;net45</TargetFrameworks>
 		<UseWPF>true</UseWPF>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
 		<AssemblyName>Phoenix.UI.Wpf</AssemblyName>
 		<RootNamespace>Phoenix.UI.Wpf</RootNamespace>
 		<Authors>Felix Leistner</Authors>
 		<Company>Little Phoenix</Company>
 		<Copyright>2020</Copyright>
-		<Version>1.0.0</Version>
+		<Version>1.1.0</Version>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<IncludeSymbols>true</IncludeSymbols>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
